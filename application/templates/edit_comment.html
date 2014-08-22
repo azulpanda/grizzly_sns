@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="texts">
+	<div class="text">
+		<form action="{{ url_for('edit_comment', comment_id=comment['id']) }}" method="POST">
+			<dd><strong>Contents</strong></dd>
+			<dd><input type="text" name="comment_body" class="long_input" value="{{ comment['body'] }}"></dd>
+			<dd><input class="reverse__btn" type="submit" value="Submit"></dd>
+		</form>
+	</div>
+</div>
+{% endblock %}

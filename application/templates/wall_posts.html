@@ -1,0 +1,32 @@
+{% for i in ordered_posts %}
+<div class="posts">
+	<div class="text">
+		<p class="writer">
+			<a href="{{ url_for('wall', wall_id=i['user_id']) }}">{{ i['email'] }}</a>
+		</p>
+		<p class="written_time">
+			{{ i['created_time'] }} 
+			{% if i['is_edited']==1 %}
+			edited:{{ i['edited_time'] }} 
+			{% endif %}
+			{% if i['is_secret']==1 %}
+			secret
+			{% endif %}
+		</p>
+		<p class="content">
+			<a href="{{ url_for('post', post_id=i['id']) }}">
+				{{ i['body'] }}
+			</a>
+		</p>
+		{% if session.user_id==i['user_id'] %}
+		<p>
+			<a href="{{ url_for('edit', post_id=i['id']) }}">Edit</a>
+			<a href="{{ url_for('remove', post_id=i['id']) }}">Remove</a>
+		</p>
+		{% endif %}
+	</div>
+</div>
+{% endfor %}
+{% if no_more %}
+<div class="no_more">No more posts</div>
+{% endif %}

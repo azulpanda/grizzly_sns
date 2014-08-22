@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block body %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/wall.js') }}"></script>
+<div class="texts">
+	<p>{{ wall_email }}'s wall!</p>
+	<p class="hidden">{{ wall_id }}</p>
+	<div class="posts_here"></div>
+	<a class="reverse__btn" href="{{ url_for('write', wall_id=wall_id) }}">Write</a>
+</div>
+{% endblock %}

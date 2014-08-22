@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="page">
+	<h2>Sign up</h2>
+	{% if message %}<p class="error"><strong>Error:</strong> {{ message }}</p>{% endif %}
+	<form action="{{ url_for('signup') }}" method="post">
+		<dl>
+			{% if form %}
+				
+				{{ form.hidden_tag() }}
+
+				{% if form.errors %}
+					<div class="alert alert-danger fade in">
+						<a href="#" class="close" data-dismiss="alert">&times;</a>
+						{% for field, errors in form.errors.items() %}
+						<ul>
+						{% for error in errors %}
+							<li>{{ error }}</li>
+						{% endfor %}
+						</ul>
+						{% endfor %}
+					</div>
+				{% endif %}
+
+				{% if signup_error %}
+					<div class="alert alert-danger fade in">
+						<a href="#" class="close" data-dismiss="alert">&times;</a>
+						{{ signup_error }}
+					</div>
+				{% endif %}
+
+				{% for field in form if field.widget.input_type != "hidden" %}
+					<div class="form-group{% if field.errors %} has-error{% endif %}">
+						<label for="{{ field.id }}">{{ field.label }}</label>
+						{% if field.widget.input_type in ['text', 'password', 'date'] %}
+							{{ field(class="form-control", placeholder=field.description.placeholder) }}
+						{% else %}
+							{{ field }}
+						{% endif %}
+
+						{% if field.errors %}
+						<div class="help-block">
+							<ul>
+							{% for error in field.errors %}
+								<li>{{ error }}</li>
+							{% endfor %}
+							</ul>
+						</div>
+						{% endif %}
+
+					</div>
+				{% endfor %}
+			{% endif %}
+
+
+			<!-- <dt>Email:</dt>
+			<dd><input type="text" name="email" id="email_input"></dd>
+			<dd class="input_error" id="email_error">Invalid email</dd>
+			<dd class="input_error" id="email_taken">Email already taken</dd>
+			<dt>Username:</dt>
+			<dd><input type="text" name="username" id="username_input"></dd>
+			<dt>Password:</dt>
+			<dd><input type="password" name="password" id="password_input"></dd>
+			<dd class="input_error" id="password_error">Invalid password</dd>
+			<dt>Retype your password:</dt>
+			<dd><input type="password" name="password_check" id="password_check_input"></dd>
+			<dd class="input_error" id="password_check_error">Passwords different</dd>
+			<dt>Gender:</dt>
+			<dd>
+				<label>
+					<input class="gender" type="radio" name="gender" value="m">Male 
+				</label>
+				<label>
+					<input class="gender" type="radio" name="gender" value="f">Female</dd>
+				</label>
+			<dt>Mobile:</dt>
+			<dd><input type="text" name="mobile" id="phone_input"></dd>
+			<dt>Birthday:</dt>
+			<dd><input type="date" name="birthday" id="birthdate_input"></dd> -->
+			<dd><input class="reverse__btn" type="submit" value="Sign up"></dd>
+		</dl>
+	</form>
+</div>
+{% endblock %}

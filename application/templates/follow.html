@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="texts">
+	<script type="text/javascript" src="{{ url_for('static', filename='js/search_user.js') }}"></script>
+	<input type="text" class="long_input" id="user_input">
+	<div class="search_output"></div>
+	<h1>Following</h1>
+	{% for i in followees %}
+		<div class="btn listed"><a href="{{ url_for('wall', wall_id=i.user_id) }}">{{ i.username }}({{ i.email }})</a></div>
+	{% endfor %}
+	<h1>Followers</h1>
+	{% for i in followers %}
+		<div class="btn listed"><a href="{{ url_for('wall', wall_id=i.user_id) }}">{{ i.username }}({{ i.email }})</a></div>
+	{% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Plougher</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.11.1.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/headhesive.min.js') }}"></script>
+</head>
+<body>
+	<table class="header">
+		<tr>
+			<td>
+				<a id="plougher" href="{{ url_for('layout') }}">Plougher</a>
+			</td>
+			{% if session.logged_in %}
+			<td>
+				Welcome, {{ session.email }}.
+			</td>
+			{% endif %}
+			<td id="buttons">
+				{% if not session.logged_in %}
+				<a class="hero__btn" href="{{ url_for('login') }}">log in</a>
+				<a class="hero__btn" href="{{ url_for('signup') }}">sign up</a>
+				{% else %}
+				<a class="hero__btn" href="{{ url_for('newsfeed') }}">newsfeed</a>
+				<a class="hero__btn" href="{{ url_for('wall', wall_id=session.user_id) }}">wall</a>
+				<a class="hero__btn" href="{{ url_for('write', wall_id=session.user_id) }}">write</a>
+				<a class="hero__btn" href="{{ url_for('follow') }}">follow</a>
+				<a class="hero__btn" href="{{ url_for('logout') }}">log out</a>
+				{% endif %}
+			</td>
+		</tr>
+	</table>
+	{% if error %}<p class="error"><strong>Error:</strong> {{ error }}</p>{% endif %}
+	{% block body %}{% endblock %}
+</body>
+</html>

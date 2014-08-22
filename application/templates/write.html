@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="texts">
+	<p>Write on {{ wall_email }}'s wall!</p>
+	<form action="{{ url_for('write', wall_id=wall_id) }}" method="post">
+		<dd><strong>Contents</strong></dd>
+		<dd><input type="text" name="body" class="long_input"></dd>
+		<dd id="secret"><input type="checkbox" name="secret">Secret</dd>
+		<dd><input class="reverse__btn" type="submit" value="Submit"></dd>
+	</form>
+</div>
+{% endblock %}

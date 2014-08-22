@@ -1,0 +1,121 @@
+body{	font-family: sans-serif; background: #eee; 
+}
+a, h1, h2{
+	color:#377ba8;
+}
+h1, h2{
+	font-family: 'Georgia', serif; margin: 0;
+}
+h1{
+	border-bottom: 2px solid #eee;
+}
+h2{
+	font-size: 1.2em;
+}
+td{
+	vertical-align: middle;
+}
+dl{
+	width:20em; text-align:center; margin:auto;
+}
+dl dt{
+	text-align: left; width:15em;
+}
+dl input{
+	margin:5px; padding:5px;
+}
+
+.gender{
+	width:5em;
+}
+.page{
+	margin: 2em auto; width: 35em; border: 5px solid #962140; padding: 0.8em; background: white; text-align: center;
+}
+.texts{
+	margin: 2em auto; width: 60em; border: 5px solid #962140; padding: 0.8em; background: white; text-align: center;
+}
+.metanav{
+	text-align: right; font-size: 0.8em; padding: 0.3em; margin-bottom: 1em; background: #fafafa;
+}
+.flash{
+	background: #cee5F5; padding: 0.5em; border: 1px slid #aacbe2;
+}
+.error{
+	background: #f0d6d6; padding: 0.5em;
+}
+.user th{
+	color:#ffffff; background-color:#555555; border:1px solid #555555; padding:3px; vertical-align:middle; text-align:left;
+}
+.user td{
+	border:1px solid #d4d4d4; padding:5px; padding-top:7px; padding-bottom:7px; vertical-align:top;
+}
+.invalid{
+	border-color: red;
+}
+.input_error{
+	color: red; display: none; font-size:12px;
+}
+
+.header{
+	background-color: #960028; border-bottom: 1px solid rgba(255,255,255,0.1); height: 70px; width: 100%; color: #fff; text-align: center;
+}
+
+.hero__btn {
+border-color: #fff; color: #fff; padding: 10px 0; width: 160 x; display: inline-block; border: 2px solid #fff; border-radius: 6px; font-weight: bold; text-transform: uppercase; padding: 10px; text-shadow: none !important; transition: all 300ms ease-in-out;
+}
+
+.hero__btn:hover{background:#fff;color:#960028;text-decoration: none;}
+
+.reverse__btn {
+border-color: #960028; color: #960028; padding: 10px 0; width: 160 x; display: inline-block; border: 2px solid #960028; border-radius: 6px; font-weight: bold; text-transform: uppercase; padding: 10px; text-shadow: none !important; transition: all 300ms ease-in-out; background-color: transparent;
+}
+.posts{
+	margin: 2em auto; width: 40em; border: 5px solid #962140; padding: 0.8em; background: white; text-align: center;
+}
+.comments{
+	font_size: 20px; padding:5px;
+}
+.text{
+	padding:10px; margin:10px;
+}
+.writer{
+	font-size: 20px;
+}
+.written_time{
+	font-size: 10px; padding:0px;
+}
+.content{
+	font-size: 25px; padding:5px;
+}
+.reverse__btn:hover{background:#960028;color:#fff;text-decoration: none;}
+
+.texts dt{
+	text-align: left; width:650px; margin:auto; font-size: 25px;
+}
+.texts input{
+	margin:5px; padding:5px; 
+}
+.posts input{
+	margin:5px; padding:5px; 
+}
+.long_input{
+	width:30em;
+}
+.hidden{
+	display: none;
+}
+.listed{
+	display: block; width: 30em;
+}
+
+
+#plougher{
+	font-size: 36px; text-align: left; padding: 0px 80px; text-decoration: none; color:white;
+}
+#buttons{
+	text-align: right; padding: 0px 80px;
+}
+#secret{
+	font-size:15px;
+}
+

@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="page">
+	<h2>Login</h2>
+	{% if error %}<p class="error"><strong>Error:</strong> {{ error }}</p>{% endif %}
+	<form action="{{ url_for('login') }}" method="post">
+		<dl>
+			{% if form %}
+				
+				{{ form.hidden_tag() }}
+
+				{% if form.errors %}
+					<div class="alert alert-danger fade in">
+						<a href="#" class="close" data-dismiss="alert">&times;</a>
+						{% for field, errors in form.errors.items() %}
+						<ul>
+						{% for error in errors %}
+							<li>{{ error }}</li>
+						{% endfor %}
+						</ul>
+						{% endfor %}
+					</div>
+				{% endif %}
+
+				{% if login_error %}
+					<div class="alert alert-danger fade in">
+						<a href="#" class="close" data-dismiss="alert">&times;</a>
+						{{ login_error }}
+					</div>
+				{% endif %}
+
+				{% for field in form if field.widget.input_type != "hidden" %}
+					<div class="form-group{% if field.errors %} has-error{% endif %}">
+						<label for="{{ field.id }}">{{ field.label }}</label>
+						{{ field(class="form-control", placeholder=field.description.placeholder) }}
+
+						{% if field.errors %}
+						<div class="help-block">
+							<ul>
+							{% for error in field.errors %}
+								<li>{{ error }}</li>
+							{% endfor %}
+							</ul>
+						</div>
+						{% endif %}
+
+					</div>
+				{% endfor %}
+			{% endif %}
+			<dd><input class="reverse__btn" type="submit" value="login"></dd>
+		</dl>
+	</form>
+</div>
+{% endblock %}

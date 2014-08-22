@@ -1,0 +1,9 @@
+{% extends 'layout.html' %}
+{% block body %}
+<img src="{{ url_for('get_profile_image', filename = filename) }}" alt="{{ filename }}">
+<form enctype="multipart/form-data" action="{{ url_for('upload_image') }}" method="post">
+<input type="file" class="reverse__btn" name="profile-image" value="Choose file">
+<input type="submit" class="reverse__btn" value="Submit">
+</form>
+
+{% endblock %}
