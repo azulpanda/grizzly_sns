@@ -1,14 +1,8 @@
 from flask import render_template, redirect, request, url_for
 from application import app
-from application.models.user_manager import *
+from application.models import user_manager
 from flask.ext.wtf import Form
-from wtforms import (
-	StringField,
-	PasswordField,
-	RadioField,
-	DateField
-)
-from wtforms import validators
+from wtforms import StringField, PasswordField, RadioField,	validators
 from wtforms.fields.html5 import DateField
 
 def existing_email(form, field):
@@ -68,9 +62,9 @@ def signup():
 	if request.method == 'POST':
 		form = SignupForm()
 		if form.validate_on_submit():
-			add_user(form)
+			user_manager.add(form)
 			return redirect(url_for('login'))
-		else:
+		else: 
 			return render_template('signup.html', form = form)
 	else:
 		form = SignupForm()

@@ -13,5 +13,5 @@ def add_follow(follower, followee):
 def get_follower(id):
 	return Follow.query.filter(Follow.followee_id == id).all()
 
-def get_followee(id):
+def followee_of(id):
 	return Follow.query.filter(Follow.follower_id == id).all()

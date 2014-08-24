@@ -1,8 +1,6 @@
 from flask import render_template, session, redirect, request, url_for
 from application import app
-from application.models.schema import *
-from application.models.post_manager import *
-from application.models.comment_manager import *
+from application.models import post_manager,comment_manager
 
 @app.route('/', defaults={'post_id':0})
 @app.route('/comment/<int:post_id>', methods=['POST'])

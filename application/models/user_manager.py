@@ -1,7 +1,7 @@
 from application import db
-from schema import *
+from schema import User
 
-def add_user(form):
+def add(form):
 	user = User(
 		email = form.email.data, 
 		username = form.username.data, 
@@ -19,10 +19,13 @@ def get_id(email):
 def get_email(id):
 	return User.query.get(id).email
 
-def login_check(email, password):
+def get_valid_account(email, password):
 	return User.query.filter(User.email == email, User.password == db.func.md5(password))
 
 def add_profile_image(user_id, filename):
 	user = User.query.get(user_id)
 	user.profile_image = filename
 	db.session.commit()
+
+def get_by_id(id) :
+	return User.query.get(id)

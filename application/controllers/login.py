@@ -1,12 +1,9 @@
 from flask import render_template, session, redirect, request, url_for
 from application import app
-from application.models.schema import *
-from application.models.user_manager import *
+from application.models import user_manager
 from flask.ext.wtf import Form
-from wtforms import (
-	StringField,
-	PasswordField
-)
+from wtforms import StringField, PasswordField
+
 from wtforms import validators
 
 class UserForm(Form):
@@ -25,14 +22,14 @@ class UserForm(Form):
 		],
 		description = {'placehoder': u'QWERqwer!@#$1234'}
 	)
-
+	
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
 	if request.method == 'POST':
 		form = UserForm()
 		if form.validate_on_submit():
-			user = login_check(form.email.data, form.password.data)
-			if user.count() == 1:
+			user = user_manager.get_valid_account(form.email.data, form.password.data).first()
+			if user :
 				user = user.one()
 				session['user_id'] = user.id
 				session['email'] = user.email

@@ -2,28 +2,26 @@ from application import db
 from schema import *
 from user_manager import *
 
-def add_comment(data, user, post):
-	comment = Comment(
-		user_id = user, 
-		post_id = post, 
-		body = data['comment_body']
-	)
-	db.session.add(comment)
+def add(body, user_id, post_id):
+	db.session.add(Comment(
+		user_id = user_id,
+		post_id = post_id, 
+		body = body
+	))
 	db.session.commit()
 
-def read_comment(comment_id):
-	get_comment = Comment.query.get(comment_id)
-	comment = {
-	'id':get_comment.id,
-	'body':get_comment.body, 
-	'is_edited':get_comment.is_edited,
-	'created_time':str(get_comment.created_time),
-	'edited_time':str(get_comment.edited_time),
-	'user_id':get_comment.user_id,
-	'email':get_email(get_comment.user_id),
-	'post_id':get_comment.post_id
+def read(comment_id):
+	comment = Comment.query.get(comment_id)
+	return {
+		'id'		:comment.id,
+		'body'		:comment.body, 
+		'is_edited'	:comment.is_edited,
+		'created_time':str(comment.created_time),
+		'edited_time':str(comment.edited_time),
+		'user_id'	:comment.user_id,
+		'email'		:get_email(comment.user_id),
+		'post_id'	:comment.post_id
 	}
-	return comment
 
 def remove_comment_mng(comment_id):
 	comment = Comment.query.get(comment_id)

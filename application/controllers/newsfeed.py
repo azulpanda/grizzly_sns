@@ -1,26 +1,31 @@
 from flask import render_template, session, request
 from application import app
-from application.models.schema import *
-from application.models.post_manager import *
-from application.models.follow_manager import *
+from application.models import post_manager,follow_manager
 
 @app.route('/newsfeed', methods=['GET', 'POST'])
 def newsfeed():
 	if 'logged_in' in session:
 		if request.method == 'POST':
 			start = int(request.form['start'])
-			end = int(request.form['end'])	
+			end = int(request.form['end'])
 			vip_id = [session['user_id']]
-			for i in get_followee(session['user_id']):
+			for i in follow_manager.followee_of(session['user_id']):
 				vip_id.append(i.followee.id)
 			posts = []
 			vip_posts = []
+			'''
+			for post in post_manager.get_newsfeed(follow_list, start, end)
+				if not post.is_secret or session['user_id'] in [post.user_id, post.wall_id] :
+					posts.append(post)
+			if end - start > len(posts) :
+				no_more = True
+			'''
 			for i in Post.query.filter(Post.user_id.in_(vip_id)):
-				if i.is_secret==False or session['user_id'] in [i.user_id, i.wall_id]:
-					posts.append(read_post(i.id))
+				if not i.is_secret or session['user_id'] in [i.user_id, i.wall_id]:
+					posts.append(i)
 			for i in Post.query.filter(Post.wall_id.in_(vip_id)):
 				if i.is_secret==False or session['user_id'] in [i.user_id, i.wall_id]:
-					posts.append(read_post(i.id))
+					posts.append(i)
 			for i in posts:
 				if i not in vip_posts:
 					vip_posts.append(i)

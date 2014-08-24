@@ -1,18 +1,16 @@
 from flask import render_template, session, request
 from application import app
-from application.models.schema import *
-from application.models.user_manager import *
-from application.models.post_manager import *
+from application.models import user_manager, post_manager
 
 @app.route('/', defaults={'wall_id':0})
 @app.route('/wall/<int:wall_id>', methods = ['GET', 'POST'])
 def wall(wall_id):
 	if 'logged_in' in session:
-		if User.query.get(wall_id) != None:
-			wall_email = get_email(wall_id)
+		wall = user_manager.get_by_id(wall_id)
+		if wall :
+			wall_email = wall.email
 			if request.method == 'POST':
-				start = int(request.form['start'])
-				end = int(request.form['end'])
+				start, end = int(request.form['start']), int(request.form['end'])
 				posts = []
 				raw_posts = Post.query.filter(Post.wall_id == wall_id).all()
 				for i in raw_posts:
@@ -28,6 +26,6 @@ def wall(wall_id):
 			else:
 				return render_template('wall.html', wall_email = wall_email, wall_id = wall_id)
 		else:
-			return render_template('layout.html', error = 'No user')
+			return redirect(url_for('page_not_found', e='user_not_found'))
 	else:
 		return render_template('layout.html', error = 'Log in')
